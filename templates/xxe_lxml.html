@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>XXE</h1>
+<div class="column is-8">
+  <p>Click the button to cause an XXE attack</p>
+
+  <br>
+  <form action="/xxe-lxml" method="get">
+    <div class="field has-addons">
+      <div class="control">
+        <input hidden class="input" type="text" name="attack" value="true">
+      </div>
+      <div class="control">
+        <button class="button is-info" action="submit">
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div>
+    {{result}}
+  </div>
+
+</div>
+{% endblock %}
