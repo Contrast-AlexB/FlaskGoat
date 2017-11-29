@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Path Traversal</h1>
+<div class="column is-8">
+    <p>Try to open a file below</p>
+    <p>Example: /etc/passwd</p>
+
+    <br>
+    <form action="/path-traversal" method="post">
+        <div class="field has-addons">
+            <div class="control">
+                <input class="input" type="text" name="user_input" placeholder="path">
+            </div>
+            <div class="control">
+                <button class="button is-info" action="submit">
+                    Execute
+                </button>
+            </div>
+        </div>
+    </form>
+    <div>
+        Result: {{ result }}
+    </div>
+
+</div>
+{% endblock %}

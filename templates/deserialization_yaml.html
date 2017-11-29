@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Untrusted Deserialization in YAML</h1>
+
+<div class="column is-8">
+    <p>Use the form below to POST a string to be deserialized into an object by YAML:</p>
+
+    <h2>Example:</h2>
+
+    <p>
+        !!map {
+          ? !!str "goodbye"
+          : !!python/object/apply:subprocess.check_output [
+          !!str "ls",
+          ],
+        }
+    </p>
+
+    {% if user_input %}
+        <p class="user-input">{{user_input}}</p>
+    {% endif %}
+
+    <br>
+
+    <form action="/deserialization_yaml" method="post">
+        <div class="field has-addons">
+            <div class="control">
+                <textarea class="input" name="user_input" placeholder="user_input"></textarea>
+            </div>
+            <div class="control">
+                <button class="button is-info" action="submit">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        {{result}}
+    </div>
+
+</div>
+{% endblock %}

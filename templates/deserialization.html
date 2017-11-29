@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Untrused Deserialization</h1>
+<div class="column is-8">
+  <p>Use the form below to send a string to be deserialized into a Python object: </p>
+
+  <h2>Examples:</h2>
+
+  <ul>
+    <li>cos
+      system
+      (S'/bin/sh'
+      tR.
+    </li>
+  </ul>
+
+  {% if user_input %}
+    <label>Path to a bad file that can be deserialized (A text area could also be used here)</label>
+    <p class="user-input">{{user_input}}</p>
+  {% endif %}
+
+  <br>
+
+  <form action="/deserialization" method="post">
+    <div class="field has-addons">
+      <div class="control">
+        <input class="input" type="text" name="user_input" placeholder="user_input">
+      </div>
+      <div class="control">
+        <button class="button is-info" action="submit">
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div>
+    {{result}}
+  </div>
+
+</div>
+{% endblock %}

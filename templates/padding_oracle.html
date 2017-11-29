@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Padding Oracle</h1>
+<div class="column is-8">
+  <p>Click below to break the ciphertext </p>
+  <br>
+  <a class="button is-danger" href="/padding-oracle?attack=true">Padding Oracle Attack</a>
+
+  <div>
+    Result: {{ result }}
+  </div>
+
+</div>
+{% endblock %}

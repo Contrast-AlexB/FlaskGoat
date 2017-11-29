@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Command Injection</h1>
+<div class="column is-8">
+  <p>This form will try to execute any commands entered below</p>
+
+  <form action="/cmdi" method="post">
+    <div class="field has-addons">
+      <div class="control">
+        <input class="input" type="text" name="user_input" placeholder="URL">
+      </div>
+      <div class="control">
+        <button class="button is-info" action="submit">
+          Execute
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div>
+    Result: {{ result }}
+  </div>
+
+</div>
+{% endblock %}
