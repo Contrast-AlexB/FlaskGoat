@@ -1,7 +1,14 @@
-from flask import Blueprint, render_template, abort
+from flask import Blueprint, render_template, abort, request
 from jinja2 import TemplateNotFound
 
-router = Blueprint('routes', __name__, template_folder='templates')
+router = Blueprint('nav_routes', __name__, template_folder='templates')
+
+
+#
+#
+# Start Navbar Routes
+#
+#
 
 
 @router.route('/', defaults={'page' : 'index'})
@@ -11,7 +18,7 @@ def home(page):
     except TemplateNotFound:
         abort(404)
 
-@router.route('/cmdi', defaults={'page' : 'CmdInject'})
+@router.route('/cmdi', defaults={'page' : 'CmdInject'}, methods=['GET'])
 def cmdi(page):
     try:
         return render_template('cmdi.html')
@@ -28,7 +35,7 @@ def deserial(page):
 @router.route('/deserialization_yaml', defaults={'page' : 'Ydeserial'})
 def deserial_yaml(page):
     try:
-        return render_template('deserialization.html')
+        return render_template('deserialization_yaml.html')
     except TemplateNotFound:
         abort(404)
 
@@ -88,6 +95,12 @@ def xxs(page):
     except TemplateNotFound:
         abort(404)
 
+
+#
+#
+# End Navbar Routes
+#
+#
 
 
 
