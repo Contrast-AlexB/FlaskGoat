@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, abort, request
 from jinja2 import TemplateNotFound
 
-router = Blueprint('nav_routes', __name__, template_folder='templates')
+router = Blueprint('nav_routes', __name__, template_folder='../../../templates/')
 
 
 #

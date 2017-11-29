@@ -4,28 +4,16 @@
 <div class="column is-8">
 
   <p>Attempt to SQL Inject this query: </p>
-      <p>"SELECT * FROM app_messages where id = '<span name="dynamic_span">user_input</span>'" </p>
+      <p>"SELECT * FROM users where id = '<span name="dynamic_span">user_input</span>'" </p>
   <br>
 
-  <h3>IN GET PARAM</h3>
-  <form action="/sqli" method="get">
-    <div class="field has-addons">
-      <div class="control">
-        <input class="input" type="text" name="user_input_id" placeholder="ID">
-      </div>
-      <div class="control">
-        <button class="button is-info" action="submit">
-          Execute
-        </button>
-      </div>
-    </div>
-  </form>
+    <p></p>
 
-  <h3>IN POST FORM</h3>
+  <h3>Attack Input</h3>
   <form action="/sqli" method="post">
     <div class="field has-addons">
       <div class="control">
-        <input class="input" type="text" name="user_input_inj" placeholder="' or 1=1 --">
+        <input class="input" type="text" name="user_input" id="user_input_id" placeholder="ID (or) ' or '1'='1">
       </div>
       <div class="control">
         <button class="button is-info" action="submit">
@@ -39,7 +27,9 @@
 
   <div>
     {% for res in result %}
-      {{res.name}} wrote {{res.content}}<br>
+        id: {{ res.id }} <br/>
+        user: {{ res.username }} <br/>
+        email: {{ res.email }} <br/>
     {% endfor %}
   </div>
 
@@ -47,14 +37,10 @@
 <!-- Jinja doesn't let you dynamically update text without a little hassle, or sending a request to rerender, so js will do. -->
     <script>
     window.onkeyup = function() {
-        var inputID = document.getElementsByName("user_input_id")[0]
-        var inputInj = document.getElementsByName("user_input_inj")[0]
+        var inputID = document.getElementById("user_input_id")
         var dynamicSpan = document.getElementsByName('dynamic_span')[0]
         if (inputID && inputID.value) {
                 dynamicSpan.innerHTML = inputID.value
-        }
-        else if (inputInj && inputInj.value) {
-                dynamicSpan.innerHTML = inputInj.value
         }
     }
     </script>

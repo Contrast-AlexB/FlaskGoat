@@ -1,0 +1,5 @@
+Jinja2==2.10
+Flask==0.12.2
+pycrypto==2.6.1
+views==0.3
+PyYAML==3.12
