@@ -1,9 +1,17 @@
 import pickle
 import subprocess
+from xml.sax import SAXParseException
 
 import requests
 import yaml
+
 from flask import Blueprint, render_template, request, current_app
+# XML Parsing
+from xml.dom import pulldom
+from lxml import etree
+import xml.sax as sax
+from xml.sax.handler import ContentHandler,EntityResolver,DTDHandler
+
 
 #TODO - Figure out a proper way to find the top dir templates folder.
 router = Blueprint('view_routes', __name__, template_folder='../../../templates/')
@@ -93,3 +101,71 @@ def sqli():
         result = e
         pass
     return render_template('sqli.html', user_input=user_input, result=result)
+
+
+@router.route('/xxe-lxml', methods=['POST'])
+def xxe_lxml():
+    attack = request.form['attack']
+    test_string = "<!DOCTYPE doc [ " \
+                  "<!ENTITY lxml SYSTEM \"file:///etc/passwd\"> " \
+                  "]>\n" \
+                  "<root>\n" \
+                  "<element>&lxml;</element>\n" \
+                  "</root>\n"
+    if str(attack).lower() == 'true':
+        etree.fromstring(test_string)
+        result = 'LXML XXE Attack Attempted'
+    else:
+        result = ''
+    return render_template('xxe_lxml.html', result=result)
+
+
+@router.route('/xxe-pulldom', methods=['POST'])
+def xxe_pulldom():
+    attack = request.form['attack']
+    test_string = "<!DOCTYPE doc [ " \
+                  "<!ENTITY pulldom SYSTEM \"file:///tmp/marker\"> " \
+                  "<!ENTITY pulldom2 SYSTEM \"http://www.google.com/marker\"> " \
+                  "]>\n" \
+                  "<root>\n" \
+                  "<element>&pulldom;</element>\n" \
+                  "<element>&pulldom2;</element>\n" \
+                  "</root>\n"
+    if str(attack).lower() == 'true':
+        pulldom.parseString(test_string)
+        result = 'PullDOM XXE Attack Attempted'
+    else:
+        result = ''
+    return render_template('xxe_pulldom.html', result=result)
+
+@router.route('/xxe-sax', methods=['POST'])
+def xxe_sax():
+    attack = request.form['attack']
+    test_string = "<!DOCTYPE doc [ " \
+                  "<!ENTITY sax SYSTEM \"file:///etc/passwd\"> " \
+                  "<!ENTITY sax2 SYSTEM \"http://www.google.com/marker\"> " \
+                  "]>\n" \
+                  "<root>\n" \
+                  "<element>&sax;</element>\n" \
+                  "<element>&sax2;</element>\n" \
+                  "</root>\n"
+    if str(attack).lower() == 'true':
+        try:
+            sax.parseString(test_string, ContentHandler())
+            result = 'SAX XXE Attack Attempted'
+        except SAXParseException as e:
+            result = 'SAX XXE Attack Attempted'
+    else:
+        result = ''
+
+    return render_template('xxe_sax.html', result=result)
+
+
+@router.route('/xss', methods=['POST'])
+def xxs():
+    user_input = request.form['user_input']
+    return render_template('xss.html', user_input=user_input)
+
+
+
+
