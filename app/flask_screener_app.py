@@ -1,8 +1,15 @@
 from app import setup_app, db
 from blueprints.routes import navRoutes, viewRoutes
+from contrast.agent.middleware import Middleware
+
+
 app = setup_app()
+# Attach Python Agent
+app.wsgi_app = Middleware(app.wsgi_app)
 app.register_blueprint(navRoutes.router)
 app.register_blueprint(viewRoutes.router)
+
+
 from app.lib.models.User import User
 
 # setup db users for injection results

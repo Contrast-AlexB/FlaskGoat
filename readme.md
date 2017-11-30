@@ -13,6 +13,8 @@
 
 3. `python setup.py install`
 
+4. `pip install -r requirements.txt` (temp - attach python agent)
+
 4. `python run.py`
 
 After this, you should be able to access the app at: [127.0.0.1:5000](http://127.0.0.1:5000)

@@ -2,10 +2,10 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 
-
 # Setup Temp Db for Sql Inj
 
 db = SQLAlchemy()
+
 
 def setup_app():
     # Setup App
