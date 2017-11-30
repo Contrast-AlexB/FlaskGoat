@@ -5,7 +5,7 @@
 
 ###Setup
 
-(Preferably this is done in a virtualenv - see [FAQ1](#####1) for instructions)
+(Preferably this is done in a virtualenv - see [FAQ](#faq) for instructions)
 
 1. `git clone -b Flask-0.12.x git@bitbucket.org:contrastsecurity/python-screener-apps.git`
 
@@ -32,8 +32,8 @@ When adding new features, make sure to update the following:
 
 
 
-###FAQ
-
+## FAQ
+- - - -
 #####1 Setting up a virtualenv
 
 - Follow these steps to setup a virtualenv
