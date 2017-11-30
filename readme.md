@@ -5,7 +5,7 @@
 
 ###Setup
 
-(Preferably this is done in a virtualenv - see [FAQ](#faq) for instructions)
+(Preferably this is done in a virtualenv)
 
 1. `git clone -b Flask-0.12.x git@bitbucket.org:contrastsecurity/python-screener-apps.git`
 
@@ -29,21 +29,3 @@ When adding new features, make sure to update the following:
 - `app/templates/` is used for any html templates
 
 - `app/static/` is used to serve static files such as CSS or JS
-
-
-
-## FAQ
-- - - -
-#####1 Setting up a virtualenv
-
-- Follow these steps to setup a virtualenv
-
-        1. pip install virtualenv
-    
-        2. virtualenv envir
-    
-        3. source envir/bin/activate
-        4. Virtualenv is now active
-        
-    
-        - To deactivate virtualenv, type deactivate
