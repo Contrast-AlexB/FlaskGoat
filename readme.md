@@ -9,7 +9,7 @@
 
 1. `git clone -b Flask-0.12.x git@bitbucket.org:contrastsecurity/python-screener-apps.git`
 
-2. `cd python-screener-app`
+2. `cd python-screener-apps`
 
 3. `python setup.py install`
 
